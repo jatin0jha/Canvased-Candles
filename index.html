@@ -110,9 +110,9 @@
         }
 
         .banner {
-            aspect-ratio: 2.5;
+            height: 40vh;
             width: 100%;
-            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.244) 0, rgba(0, 0, 0, 0.856) 100%), url(https://c.pxhere.com/photos/a3/6c/chair_living_room_indoor_decor_flat-181502.jpg!d);
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.244) 0, rgba(0, 0, 0, 0.856) 100%), url('https://creativecandles.com/cdn/shop/files/CC-Web-Banner-WinterCollection-3.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -253,12 +253,12 @@
 
         .hot-prod-img {
             aspect-ratio: 1;
-            border-radius: 5px;
+            border-radius: 20px;
             background-color: rgb(216, 237, 255);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-image: url(https://s.alicdn.com/@sc04/kf/A6cc9e73e93554eb5a99698f3bf4cc690q.png);
+            background-image: url('https://i.pinimg.com/736x/88/04/ca/8804cab305774a8170ad31193204dfa0.jpg');
         }
 
 
@@ -402,11 +402,15 @@
         }
 
         @media screen and (max-width: 600px) {
+            .banner {
+                height: 30vh;
+            }
 
-            .product-flex{
+            .product-flex {
                 grid-template-columns: 1fr;
                 margin: 10px;
             }
+
             .hot-prod {
                 grid-template-columns: 1fr;
                 gap: 0;
