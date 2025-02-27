@@ -399,23 +399,125 @@
             border-color: #1ebe57;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        @media screen and (max-width: 600px) {
+
+            .product-flex{
+                grid-template-columns: 1fr;
+                margin: 10px;
+            }
+            .hot-prod {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            #featured-products {
+                grid-template-columns: 1fr 1fr;
+                gap: 5px;
+            }
+
+            .product-card {
+                grid-template-columns: 1fr 1fr;
+                gap: 5px;
+            }
+
+            .clmns {
+                grid-template-columns: 1fr;
+            }
+
+            .blubranch {
+                display: none;
+            }
+
+            .burger-menu {
+                aspect-ratio: 3/2;
+                height: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .burger-menu span {
+                height: 3px;
+                border-radius: 5px;
+                background-color: black;
+            }
+
+            .burger-menu span:nth-child(1) {
+                margin-left: 5px;
+            }
+
+            .burger-menu span:nth-child(3) {
+                margin-right: 5px;
+            }
+
+            .sliding-sidebar {
+                position: absolute;
+                background-color: white;
+                flex-direction: column;
+                top: 0;
+                left: 0;
+                width: 0;
+                overflow: hidden;
+                height: calc(100vh - 16px);
+                border-right: 1px solid rgb(142, 142, 142);
+                transition: width 0.3s ease-in-out;
+            }
+
+            .sliding-sidebar.open {
+                width: 200px;
+            }
+        }
     </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.querySelector(".sliding-sidebar");
+            const burgerMenu = document.querySelector(".burger-menu");
+            const navLinks = document.querySelectorAll(".sliding-sidebar a"); // Select all nav links
+
+            burgerMenu.addEventListener("click", function (event) {
+                sidebar.classList.toggle("open");
+                event.stopPropagation(); // Prevents click from bubbling up to `document`
+            });
+
+            document.addEventListener("click", function (event) {
+                if (!sidebar.contains(event.target) && !burgerMenu.contains(event.target)) {
+                    sidebar.classList.remove("open");
+                }
+            });
+
+            // Close sidebar when clicking any navigation link
+            navLinks.forEach(link => {
+                link.addEventListener("click", function () {
+                    sidebar.classList.remove("open");
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
     <!-- Loading Screen -->
-    <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #F6F6F6; display: flex; justify-content: center; align-items: center; z-index: 9999;">
-        <img src="https://i.pinimg.com/originals/9f/ad/79/9fad79ec23e09691320df47a88ed73d8.gif" alt="Loading..." style="width: 100px;">
+    <div id="loading-screen"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #F6F6F6; display: flex; justify-content: center; align-items: center; z-index: 9999;">
+        <img src="https://i.pinimg.com/originals/9f/ad/79/9fad79ec23e09691320df47a88ed73d8.gif" alt="Loading..."
+            style="width: 100px;">
     </div>
 
     <div class="container-nav">
         <nav>
-            <ul>
+            <ul class="sliding-sidebar">
                 <img src="assets/logo.png" alt="" height="50px" class="logo">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#custom">Custom order</a></li>
             </ul>
+            <div class="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <div class="nav-right-icons">
                 <a href="#search"><img src="assets/search.svg" height="30px" alt="" class="search"></a>
             </div>
@@ -437,17 +539,10 @@
         <div class="hot-prod">
             <div class="hot-prod-img"></div>
             <div class="hot-prod-txt">
-                <p style="font-size: 23px; font-weight: 300">MARBLE SHELF</p>
+                <p style="font-size: 23px; font-weight: 300; margin-top: 5px;">MARBLE SHELF</p>
                 <p style="font-size: 14px; color: rgb(113, 113, 113); line-height: 1.7">
                     Elevate the ambiance of your living spaces with the exquisite allure of marble. Introducing the
-                    Bedroom Living Room Table Marble Shelf Bedside Coffee Tea Table for Home Decor. This opulent piece
-                    is not just furniture; it's a statement, a symbol of refined taste. Crafted with precision and
-                    adorned with the timeless elegance of marble, this table seamlessly merges functionality with
-                    aesthetic appeal. Whether gracing your bedroom, living room, or serving as a sophisticated bedside
-                    or coffee table, its presence transforms ordinary spaces into extraordinary realms of style. The
-                    smooth marble surface exudes luxury, providing an ideal platform for decor elements or a cozy cup of
-                    tea. Embrace the fusion of practicality and sophistication, as this marble table becomes the focal
-                    point for creating memorable moments in your home.
+                    Bedroom Living Room Table Marble Shelf Bedside Coffee Tea Table for Home Decor.
                 </p>
                 <nav>
                     <ul style="list-style: none; padding: 0;">
@@ -478,18 +573,6 @@
         ">
             PRODUCTS
         </p>
-        <div style="
-          display: flex;
-          justify-content: space-between;
-          border: 0.5px solid rgb(196, 196, 196);
-          padding: 8px 60px;
-          margin-bottom: 60px;
-        ">
-            <div></div>
-            <div>
-                <a style="padding: 10px 30px;border: 0.5px solid rgb(196, 196, 196); margin: 0;" href="">FILTER</a>
-            </div>
-        </div>
         <div class="product-card">
         </div>
     </section>
@@ -527,15 +610,19 @@
                 <h4>Contact Us</h4>
                 <a href="mailto:fragrantiacandle234@gmail.com">fragrantiacandle234@gmail.com</a><br><br>
                 <a href="https://wa.me/917210111699">Whatsapp Us At +91 7210111699</a><br><br>
-                <a href="https://www.instagram.com/canvasedcandles" style="display: flex; align-items: center;"><img src="https://www.svgrepo.com/show/521711/instagram.svg" height="30px" alt="">Instagram</a><br>
-                <a href="https://www.facebook.com/profile.php?id=61568587108087" style="display: flex; align-items: center;"><img src="https://www.svgrepo.com/show/475647/facebook-color.svg" height="30px" alt="">Facebook</a>
+                <a href="https://www.instagram.com/canvasedcandles" style="display: flex; align-items: center;"><img
+                        src="https://www.svgrepo.com/show/521711/instagram.svg" height="30px" alt="">Instagram</a><br>
+                <a href="https://www.facebook.com/profile.php?id=61568587108087"
+                    style="display: flex; align-items: center;"><img
+                        src="https://www.svgrepo.com/show/475647/facebook-color.svg" height="30px" alt="">Facebook</a>
             </div>
         </div>
 
 
         <div style="display: flex; justify-content: space-between; padding-top: 10vh">
             <p>© Eve Crafts Overseas. ALL RIGHTS RESERVED</p>
-            <p>POWERED BY ©<a href="https://jatinjha.pages.dev/">BlueBranch</a> Inc. Iowa City, USA</p>
+            <p class="blubranch">POWERED BY ©<a href="https://jatinjha.pages.dev/">BlueBranch</a> Inc. Iowa City, USA
+            </p>
         </div>
     </footer>
 
